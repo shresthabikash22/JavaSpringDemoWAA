@@ -1,17 +1,15 @@
 package edu.miu.springdemo.repo;
 
 import edu.miu.springdemo.entity.Post;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
-public interface PostRepo {
-   List<Post> findAll();
-   Post findById(long id);
-   void save(Post p);
-
-   void delete(long id);
-
-   void update(long id, Post p);
-
-   List<Post> getPostsByAuthor(String author);
+@Repository
+public interface PostRepo extends JpaRepository<Post,Integer> {
+    List<Post> findByAuthor(String author);
+    List<Post> findByAuthorContainingIgnoreCase(String text);
 }

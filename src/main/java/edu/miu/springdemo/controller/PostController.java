@@ -1,6 +1,6 @@
 package edu.miu.springdemo.controller;
 
-import edu.miu.springdemo.entity.dto.response.PostDto;
+import edu.miu.springdemo.entity.dto.response.PostResponseDTO;
 import edu.miu.springdemo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,19 +14,19 @@ public class PostController {
     @Autowired
     PostService postService;
     @GetMapping
-    public List<PostDto> findAll(){
+    public List<PostResponseDTO> findAll(){
         return postService.findAll();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void save(@RequestBody PostDto p){
+    public void save(@RequestBody PostResponseDTO p){
         postService.save(p);
 
     }
 
     @GetMapping("/{id}")
-    public PostDto findById(@PathVariable("id") long id){
+    public PostResponseDTO findById(@PathVariable("id") long id){
         return postService.findById(id);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -36,12 +36,17 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable("id") int id,@RequestBody PostDto p){
+    public void update(@PathVariable("id") long id,@RequestBody PostResponseDTO p){
         postService.update(id,p);
     }
 
-    @GetMapping("/search")
-    public List<PostDto> getPostsByAuthor(@RequestParam String author){
+    @GetMapping("/byAuthor")
+    public List<PostResponseDTO> getPostsByAuthor(@RequestParam String author){
         return postService.getPostsByAuthor(author);
+    }
+
+    @GetMapping("/byAuthorText")
+    public List<PostResponseDTO> getPostsByAuthorText(@RequestParam String text){
+        return postService.getPostsByAuthorText(text);
     }
 }
