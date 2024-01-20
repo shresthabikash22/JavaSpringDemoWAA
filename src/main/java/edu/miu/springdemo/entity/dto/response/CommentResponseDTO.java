@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserResponseDTO {
-    int id;
+public class CommentResponseDTO {
     String name;
+    int postId;
 }

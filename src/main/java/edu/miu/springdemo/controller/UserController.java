@@ -1,8 +1,12 @@
 package edu.miu.springdemo.controller;
 
+import edu.miu.springdemo.entity.dto.request.CommentRequestDTO;
 import edu.miu.springdemo.entity.dto.request.UserRequestDTO;
+import edu.miu.springdemo.entity.dto.response.CommentResponseDTO;
 import edu.miu.springdemo.entity.dto.response.PostResponseDTO;
 import edu.miu.springdemo.entity.dto.response.UserResponseDTO;
+import edu.miu.springdemo.service.CommentService;
+import edu.miu.springdemo.service.PostService;
 import edu.miu.springdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,12 +19,19 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    PostService postService;
+    @Autowired
+    CommentService commentService;
 //
     @GetMapping
-    public List<UserResponseDTO> findAll(){return userService.findAll();}
-    @GetMapping("/{id}")
-    public UserResponseDTO findById(@PathVariable("id") long id){
-        return userService.findById(id);
+    public List<UserResponseDTO> findAll(@RequestParam(required = false,defaultValue = "")String postTitle){
+
+        return userService.findAll(postTitle);
+    }
+    @GetMapping("/{uid}")
+    public UserResponseDTO findById(@PathVariable("uid") int uid){
+        return userService.findById(uid);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -29,11 +40,45 @@ public class UserController {
         userService.save(usr);
 
     }
-
-    @GetMapping("/{id}/posts")
-    public List<PostResponseDTO> findPostsByUserId(@PathVariable("id") long id){
-        return userService.findAllPostByUserId(id);
+/**  -----------------------------  POSTS ----------------------------**/
+    @GetMapping("/{userId}/posts")
+    public List<PostResponseDTO> findPostsByUserId(@PathVariable("userId") int userId){
+        return userService.findAllPostByUserId(userId);
     }
+
+    @GetMapping("/{userId}/posts/{postId}")
+    public PostResponseDTO findPostById(@PathVariable int userId, @PathVariable int postId){
+        return postService.getPostById(userId,postId);
+    }
+
+
+    @GetMapping("filter/posts/{num}")
+    public List<UserResponseDTO>  findUsersWithPosts (@PathVariable int num){
+        return userService.findUsersWithMoreThanNPosts(num);
+    }
+
+    @GetMapping("/posts")
+    public List<PostResponseDTO> findPostsByTitle(@RequestParam String title){
+        return postService.findPostsByTitle(title);
+    }
+
+
+    @PostMapping("/{userId}/posts")
+    public void savePost(@RequestBody PostResponseDTO post){
+        postService.save(post);
+        // add save post for a give user
+    }
+
+    /**   -------------------- Comments -----------------**/
+    @PostMapping("/{userId}/posts/{postId}/comments")
+    public void addNewComment(@PathVariable int userId, @PathVariable int postId, @RequestBody CommentRequestDTO commentRequestDTO){
+         commentService.addNewComment(postId,commentRequestDTO);
+    }
+    @GetMapping("/{userId}/posts/{postId}/comments/{commentId}")
+    public CommentResponseDTO getCommentsByIds(@PathVariable int userId,@PathVariable int postId,@PathVariable int commentId){
+        return commentService.getCommentByIds(userId, postId, commentId);
+    }
+
 
 
 

@@ -12,4 +12,7 @@ import java.util.List;
 public interface PostRepo extends JpaRepository<Post,Integer> {
     List<Post> findByAuthor(String author);
     List<Post> findByAuthorContainingIgnoreCase(String text);
+
+    List<Post> findByTitle(String title);
+
 }

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostResponseDTO {
-    private long id;
+
     private String title;
     private String content;
     private  String author;

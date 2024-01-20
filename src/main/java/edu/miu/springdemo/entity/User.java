@@ -14,9 +14,10 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
-    String name;
-    @OneToMany
+    private int id;
+    private String name;
+
+    @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="userId")
     List<Post> posts;
 }

@@ -25,8 +25,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostResponseDTO findById(long id) {
-        return modelMapper.map(postRepo.findById((int)id), PostResponseDTO.class);
+    public PostResponseDTO findById(int id) {
+        return modelMapper.map(postRepo.findById(id), PostResponseDTO.class);
     }
 
     @Override
@@ -35,13 +35,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void delete(long id) {
-        postRepo.deleteById((int)id);
+    public void delete(int id) {
+        postRepo.deleteById(id);
     }
 
     @Override
-    public void update(long id, PostResponseDTO p) {
-        PostResponseDTO postToUpdate = modelMapper.map(postRepo.getReferenceById((int)id), PostResponseDTO.class);
+    public void update(int id, PostResponseDTO p) {
+        PostResponseDTO postToUpdate = modelMapper.map(postRepo.getReferenceById(id), PostResponseDTO.class);
         postToUpdate.setContent(p.getContent());
         postToUpdate.setTitle(p.getTitle());
         postToUpdate.setAuthor(p.getAuthor());
@@ -58,5 +58,20 @@ public class PostServiceImpl implements PostService {
     public List<PostResponseDTO> getPostsByAuthorText(String author) {
         return (List<PostResponseDTO>) listMapper.mapList(postRepo.findByAuthorContainingIgnoreCase(author),new PostResponseDTO());
 
+    }
+
+    @Override
+    public PostResponseDTO getPostById(int userId, int postId) {
+        Post post = postRepo.findById(postId).orElse(null);
+        if(post!=null)
+        {
+            return modelMapper.map(post,PostResponseDTO.class);
+        }
+        return null;
+    }
+
+    @Override
+    public List<PostResponseDTO> findPostsByTitle(String title) {
+        return listMapper.mapList(postRepo.findByTitle(title),new PostResponseDTO());
     }
 }

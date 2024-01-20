@@ -6,14 +6,17 @@ import java.util.List;
 
 public interface PostService {
     List<PostResponseDTO> findAll();
-    PostResponseDTO findById(long id);
+    PostResponseDTO findById(int id);
 
     void save(PostResponseDTO p);
 
-    void delete(long id);
+    void delete(int id);
 
-    void update(long id, PostResponseDTO p);
+    void update(int id, PostResponseDTO p);
 
     List<PostResponseDTO> getPostsByAuthor(String author);
     List<PostResponseDTO> getPostsByAuthorText(String author);
+    public PostResponseDTO getPostById(int userId, int postId);
+
+    List<PostResponseDTO> findPostsByTitle(String title);
 }

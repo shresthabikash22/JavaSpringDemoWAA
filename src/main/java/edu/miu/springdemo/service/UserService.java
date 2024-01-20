@@ -7,12 +7,18 @@ import edu.miu.springdemo.entity.dto.response.UserResponseDTO;
 import java.util.List;
 
 public interface UserService {
-    List<UserResponseDTO> findAll();
+    List<UserResponseDTO> findAll(String PostTitle);
 
-    UserResponseDTO findById(long id);
+    UserResponseDTO findById(int id);
 
     void save(UserRequestDTO u);
 
-    List<PostResponseDTO> findAllPostByUserId(long id);
+    List<PostResponseDTO> findAllPostByUserId(int id);
+
+    List<PostResponseDTO> findPostByUserIdAndPostId(int userId,int postId);
+
+    List<UserResponseDTO> findUsersWithMoreThanNPosts(int num);
+
+
 
 }

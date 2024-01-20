@@ -22,21 +22,20 @@ public class PostController {
     @PostMapping
     public void save(@RequestBody PostResponseDTO p){
         postService.save(p);
-
     }
 
     @GetMapping("/{id}")
-    public PostResponseDTO findById(@PathVariable("id") long id){
+    public PostResponseDTO findById(@PathVariable("id") int id){
         return postService.findById(id);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") long id){
+    public void delete(@PathVariable("id") int id){
         postService.delete(id);
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable("id") long id,@RequestBody PostResponseDTO p){
+    public void update(@PathVariable("id") int id,@RequestBody PostResponseDTO p){
         postService.update(id,p);
     }
 
