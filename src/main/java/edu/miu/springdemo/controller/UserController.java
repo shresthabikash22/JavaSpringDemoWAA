@@ -1,5 +1,6 @@
 package edu.miu.springdemo.controller;
 
+import edu.miu.springdemo.aspect.annotation.ExecutionTime;
 import edu.miu.springdemo.entity.User;
 import edu.miu.springdemo.entity.dto.request.CommentRequestDTO;
 import edu.miu.springdemo.entity.dto.request.UserRequestDTO;
@@ -30,6 +31,7 @@ public class UserController {
 
         return userService.findAll(postTitle);
     }
+    @ExecutionTime
     @GetMapping("/{uid}")
     public UserResponseDTO findById(@PathVariable("uid") int uid){
         return userService.findById(uid);
@@ -81,6 +83,11 @@ public class UserController {
     @GetMapping("/{userId}/posts/{postId}/comments/{commentId}")
     public CommentResponseDTO getCommentsByIds(@PathVariable int userId,@PathVariable int postId,@PathVariable int commentId){
         return commentService.getCommentByIds(userId, postId, commentId);
+    }
+
+    @GetMapping("/{userId}/posts/{postId}/comments")
+    public List<CommentResponseDTO> getCommentList(@PathVariable int userId, @PathVariable int postId){
+        return commentService.getCommentList(userId, postId);
     }
 
 

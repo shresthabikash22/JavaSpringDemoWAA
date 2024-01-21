@@ -62,5 +62,16 @@ public class CommentServiceImpl implements CommentService {
         return null;
     }
 
+    @Override
+    public List<CommentResponseDTO> getCommentList(int userId,int postId){
+        User user = userRepo.findById(userId).orElse(null);
+        if(user!=null){
+            Post post = user.getPosts().stream().filter(p->p.getId() == postId).findFirst().orElse(null);
+            if(post!=null){
+                return listMapper.mapList(post.getComments(),new CommentResponseDTO());
+            }
+        }
+       return null;
+    }
 
 }

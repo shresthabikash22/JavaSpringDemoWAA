@@ -12,4 +12,6 @@ public interface CommentService {
     List<CommentResponseDTO> getAllCommentsByPostId(int id);
 
     public CommentResponseDTO getCommentByIds(int userId, int postId, int commentId);
+    List<CommentResponseDTO> getCommentList(int userId,int postId);
+
 }
