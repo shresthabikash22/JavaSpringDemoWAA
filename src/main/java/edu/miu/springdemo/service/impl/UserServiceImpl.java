@@ -47,9 +47,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deleteUser(int userId) {
+        userRepo.deleteById(userId);
+    }
+
+    @Override
     public List<PostResponseDTO> findAllPostByUserId(int id) {
         List<Post> posts = userRepo.findById(id).orElseThrow(()-> new EntityNotFoundException("User not found")).getPosts();
-        return listMapper.mapList(posts, new UserResponseDTO());
+        return listMapper.mapList(posts, new PostResponseDTO());
     }
 
     @Override

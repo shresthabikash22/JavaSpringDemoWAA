@@ -24,4 +24,6 @@ public class Post {
     @JoinColumn(name="postId")
     private List<Comment> comments;
 
+
+
 }

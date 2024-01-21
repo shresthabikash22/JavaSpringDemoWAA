@@ -9,7 +9,7 @@ public interface PostService {
     PostResponseDTO findById(int id);
 
     void save(PostResponseDTO p);
-
+    void saveUserPost(int userId,PostResponseDTO post);
     void delete(int id);
 
     void update(int id, PostResponseDTO p);

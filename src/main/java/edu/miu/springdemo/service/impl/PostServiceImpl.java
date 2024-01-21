@@ -1,9 +1,11 @@
 package edu.miu.springdemo.service.impl;
 
 import edu.miu.springdemo.entity.Post;
+import edu.miu.springdemo.entity.User;
 import edu.miu.springdemo.entity.dto.response.PostResponseDTO;
 import edu.miu.springdemo.helper.ListMapper;
 import edu.miu.springdemo.repo.PostRepo;
+import edu.miu.springdemo.repo.UserRepo;
 import edu.miu.springdemo.service.PostService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
     @Autowired
     PostRepo postRepo;
+    @Autowired
+    UserRepo userRepo;
     @Autowired
     ModelMapper modelMapper;
     @Autowired
@@ -32,6 +36,19 @@ public class PostServiceImpl implements PostService {
     @Override
     public void save(PostResponseDTO p) {
         postRepo.save(modelMapper.map(p, Post.class));
+    }
+
+    @Override
+    public void saveUserPost(int userId, PostResponseDTO postResponseDTO) {
+       User user =userRepo.findById(userId).orElse(null);
+       if(user!=null)
+       {
+           Post p = modelMapper.map(postResponseDTO,Post.class);
+           p.setAuthor(user.getName());
+           user.getPosts().add(p);
+           userRepo.save(user);
+       }
+
     }
 
     @Override

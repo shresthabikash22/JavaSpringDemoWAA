@@ -1,5 +1,6 @@
 package edu.miu.springdemo.controller;
 
+import edu.miu.springdemo.entity.User;
 import edu.miu.springdemo.entity.dto.request.CommentRequestDTO;
 import edu.miu.springdemo.entity.dto.request.UserRequestDTO;
 import edu.miu.springdemo.entity.dto.response.CommentResponseDTO;
@@ -40,10 +41,19 @@ public class UserController {
         userService.save(usr);
 
     }
+    @DeleteMapping("/{userId}")
+    public void deleteUser(@PathVariable int userId){
+        userService.deleteUser(userId);
+    }
+
+
 /**  -----------------------------  POSTS ----------------------------**/
     @GetMapping("/{userId}/posts")
-    public List<PostResponseDTO> findPostsByUserId(@PathVariable("userId") int userId){
-        return userService.findAllPostByUserId(userId);
+    public List<PostResponseDTO> findPostsByUserId(@PathVariable("userId") int userId,@RequestParam(required = false,defaultValue = "") String title){
+        if(title.isEmpty()){
+            return userService.findAllPostByUserId(userId);
+        }
+        return postService.findPostsByTitle(title);
     }
 
     @GetMapping("/{userId}/posts/{postId}")
@@ -57,16 +67,10 @@ public class UserController {
         return userService.findUsersWithMoreThanNPosts(num);
     }
 
-    @GetMapping("/posts")
-    public List<PostResponseDTO> findPostsByTitle(@RequestParam String title){
-        return postService.findPostsByTitle(title);
-    }
-
-
     @PostMapping("/{userId}/posts")
-    public void savePost(@RequestBody PostResponseDTO post){
-        postService.save(post);
-        // add save post for a give user
+    public void savePost(@PathVariable int userId,@RequestBody PostResponseDTO post){
+
+        postService.saveUserPost(userId,post);
     }
 
     /**   -------------------- Comments -----------------**/

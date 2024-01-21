@@ -13,6 +13,8 @@ public interface UserService {
 
     void save(UserRequestDTO u);
 
+    void deleteUser(int userId);
+
     List<PostResponseDTO> findAllPostByUserId(int id);
 
     List<PostResponseDTO> findPostByUserIdAndPostId(int userId,int postId);
