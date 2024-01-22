@@ -47,7 +47,10 @@ public class UserController {
     public void deleteUser(@PathVariable int userId){
         userService.deleteUser(userId);
     }
-
+    @GetMapping("/exception-test")
+    public void exceptionTest() throws Exception{
+            throw new Exception("Exception from user");
+    }
 
 /**  -----------------------------  POSTS ----------------------------**/
     @GetMapping("/{userId}/posts")

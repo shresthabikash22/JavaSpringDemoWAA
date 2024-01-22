@@ -18,7 +18,7 @@ public class ExceptionLoggingAspect{
     @Autowired
     private ExceptionLoggerRepo exceptionLoggerRepo;
 
-    @Pointcut("execution(* edu.miu.springdemo.controller.*.*(..))")
+    @Pointcut("execution(* edu.miu.springdemo..*.*(..))")
     public void allMethods(){
 
     }
