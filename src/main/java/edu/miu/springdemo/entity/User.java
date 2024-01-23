@@ -17,7 +17,16 @@ public class User {
     private int id;
     private String name;
 
+    private String email;
+    private String password;
+    private String firstname;
+    private String lastname;
+
     @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="userId")
     List<Post> posts;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable
+    private List<Role> roles;
 }

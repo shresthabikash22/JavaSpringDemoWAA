@@ -15,4 +15,6 @@ public interface UserRepo extends JpaRepository<User,Integer> {
 
     @Query("select distinct u from User  u JOIN u.posts p where p.title = :title")
     List<User> findUsersByPostTitle(String title);
+
+    User findByEmail(String email);
 }
