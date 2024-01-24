@@ -1,5 +1,6 @@
 package edu.miu.springdemo.controller;
 
+import edu.miu.springdemo.aspect.annotation.Confirm;
 import edu.miu.springdemo.aspect.annotation.ExecutionTime;
 import edu.miu.springdemo.entity.User;
 import edu.miu.springdemo.entity.dto.request.CommentRequestDTO;
@@ -26,6 +27,7 @@ public class UserController {
     @Autowired
     CommentService commentService;
 //
+    @Confirm
     @GetMapping
     public List<UserResponseDTO> findAll(@RequestParam(required = false,defaultValue = "")String postTitle){
 
@@ -43,6 +45,7 @@ public class UserController {
         userService.save(usr);
 
     }
+    @Confirm
     @DeleteMapping("/{userId}")
     public void deleteUser(@PathVariable int userId){
         userService.deleteUser(userId);
