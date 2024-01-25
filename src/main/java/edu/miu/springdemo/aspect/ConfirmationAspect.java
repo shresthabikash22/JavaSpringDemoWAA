@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class ConfirmationAspect {
-    @Pointcut("@annotation(edu.miu.springdemo.aspect.annotation.Confirm)")
+//    @Pointcut("@annotation(edu.miu.springdemo.aspect.annotation.Confirm)")
+    @Pointcut("execution(* edu.miu.springdemo.controller.UserController.save*(..)))" +  "|| execution(* edu.miu.springdemo.controller.UserController.findAll*(..)))")
     public void confirmartionAnnotation(){}
 
     @After("confirmartionAnnotation()")

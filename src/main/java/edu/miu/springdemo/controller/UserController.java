@@ -27,7 +27,7 @@ public class UserController {
     @Autowired
     CommentService commentService;
 //
-    @Confirm
+//    @Confirm
     @GetMapping
     public List<UserResponseDTO> findAll(@RequestParam(required = false,defaultValue = "")String postTitle){
 
@@ -45,7 +45,7 @@ public class UserController {
         userService.save(usr);
 
     }
-    @Confirm
+//    @Confirm
     @DeleteMapping("/{userId}")
     public void deleteUser(@PathVariable int userId){
         userService.deleteUser(userId);
