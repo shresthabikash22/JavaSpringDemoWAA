@@ -1,7 +1,7 @@
 package edu.miu.springdemo.service;
 
 import edu.miu.springdemo.entity.dto.request.UserRequestDTO;
-import edu.miu.springdemo.entity.dto.response.PostResponseDTO;
+import edu.miu.springdemo.entity.dto.response.post.PostResponseDTO;
 import edu.miu.springdemo.entity.dto.response.UserResponseDTO;
 
 import java.util.List;

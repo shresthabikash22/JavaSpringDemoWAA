@@ -1,11 +1,10 @@
 package edu.miu.springdemo.controller;
 
 import edu.miu.springdemo.aspect.annotation.ExecutionTime;
-import edu.miu.springdemo.entity.User;
 import edu.miu.springdemo.entity.dto.request.CommentRequestDTO;
 import edu.miu.springdemo.entity.dto.request.UserRequestDTO;
 import edu.miu.springdemo.entity.dto.response.CommentResponseDTO;
-import edu.miu.springdemo.entity.dto.response.PostResponseDTO;
+import edu.miu.springdemo.entity.dto.response.post.PostResponseDTO;
 import edu.miu.springdemo.entity.dto.response.UserResponseDTO;
 import edu.miu.springdemo.service.CommentService;
 import edu.miu.springdemo.service.PostService;

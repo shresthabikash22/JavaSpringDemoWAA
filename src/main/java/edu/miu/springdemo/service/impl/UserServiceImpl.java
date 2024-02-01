@@ -3,7 +3,7 @@ package edu.miu.springdemo.service.impl;
 import edu.miu.springdemo.entity.Post;
 import edu.miu.springdemo.entity.User;
 import edu.miu.springdemo.entity.dto.request.UserRequestDTO;
-import edu.miu.springdemo.entity.dto.response.PostResponseDTO;
+import edu.miu.springdemo.entity.dto.response.post.PostResponseDTO;
 import edu.miu.springdemo.entity.dto.response.UserResponseDTO;
 import edu.miu.springdemo.helper.ListMapper;
 import edu.miu.springdemo.repo.UserRepo;

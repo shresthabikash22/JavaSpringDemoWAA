@@ -1,4 +1,4 @@
-package edu.miu.springdemo.entity.dto.response;
+package edu.miu.springdemo.entity.dto.response.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostResponseDTO {
-
+    int id;
     private String title;
     private String content;
     private  String author;

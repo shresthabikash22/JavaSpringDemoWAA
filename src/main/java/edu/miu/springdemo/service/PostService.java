@@ -1,14 +1,16 @@
 package edu.miu.springdemo.service;
 
-import edu.miu.springdemo.entity.dto.response.PostResponseDTO;
+import edu.miu.springdemo.entity.dto.request.PostRequestDTO;
+import edu.miu.springdemo.entity.dto.response.post.PostRESPDTO;
+import edu.miu.springdemo.entity.dto.response.post.PostResponseDTO;
 
 import java.util.List;
 
 public interface PostService {
     List<PostResponseDTO> findAll();
-    PostResponseDTO findById(int id);
+    PostRESPDTO findById(int id);
 
-    void save(PostResponseDTO p);
+    void save(PostRequestDTO p);
     void saveUserPost(int userId,PostResponseDTO post);
     void delete(int id);
 

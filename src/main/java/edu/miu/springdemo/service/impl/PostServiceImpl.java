@@ -2,7 +2,9 @@ package edu.miu.springdemo.service.impl;
 
 import edu.miu.springdemo.entity.Post;
 import edu.miu.springdemo.entity.User;
-import edu.miu.springdemo.entity.dto.response.PostResponseDTO;
+import edu.miu.springdemo.entity.dto.request.PostRequestDTO;
+import edu.miu.springdemo.entity.dto.response.post.PostRESPDTO;
+import edu.miu.springdemo.entity.dto.response.post.PostResponseDTO;
 import edu.miu.springdemo.helper.ListMapper;
 import edu.miu.springdemo.repo.PostRepo;
 import edu.miu.springdemo.repo.UserRepo;
@@ -29,12 +31,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostResponseDTO findById(int id) {
-        return modelMapper.map(postRepo.findById(id), PostResponseDTO.class);
+    public PostRESPDTO findById(int id) {
+        return modelMapper.map(postRepo.findById(id), PostRESPDTO.class);
     }
 
     @Override
-    public void save(PostResponseDTO p) {
+    public void save(PostRequestDTO p) {
         postRepo.save(modelMapper.map(p, Post.class));
     }
 

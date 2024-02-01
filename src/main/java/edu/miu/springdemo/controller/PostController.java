@@ -1,6 +1,9 @@
 package edu.miu.springdemo.controller;
 
-import edu.miu.springdemo.entity.dto.response.PostResponseDTO;
+import edu.miu.springdemo.entity.Post;
+import edu.miu.springdemo.entity.dto.request.PostRequestDTO;
+import edu.miu.springdemo.entity.dto.response.post.PostRESPDTO;
+import edu.miu.springdemo.entity.dto.response.post.PostResponseDTO;
 import edu.miu.springdemo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PostController {
     @Autowired
     PostService postService;
@@ -20,12 +24,12 @@ public class PostController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void save(@RequestBody PostResponseDTO p){
+    public void save(@RequestBody PostRequestDTO p){
         postService.save(p);
     }
 
     @GetMapping("/{id}")
-    public PostResponseDTO findById(@PathVariable("id") int id){
+    public PostRESPDTO findById(@PathVariable("id") int id){
         return postService.findById(id);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
